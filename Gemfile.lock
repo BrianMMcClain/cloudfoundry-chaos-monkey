@@ -6,6 +6,7 @@ GEM
       rest-client (~> 1.6.1)
       rubyzip (~> 0.9.5)
     crack (0.3.1)
+    eventmachine (0.12.10)
     interact (0.4.7)
     json_pure (1.6.7)
     manifests-vmc-plugin (0.4.3)
@@ -54,4 +55,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  eventmachine (= 0.12.10)
   vmc (= 0.4.0.beta.36)
