@@ -33,7 +33,7 @@ module CFCM
           puts "Could not log in"
         end
         
-        monkey = CFCM::Monkey::SoftMonkey.new(session, app)
+        monkey = CFCM::Monkey::SoftMonkey.new(session, app, 0.5, 1, 10)
         monkey.start
       end     
     end
