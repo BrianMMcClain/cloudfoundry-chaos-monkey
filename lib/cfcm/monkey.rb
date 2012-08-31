@@ -3,18 +3,19 @@ require "eventmachine"
 module CFCM
   module Monkey
     class SoftMonkey      
-      def initialize(session, app_name, probability, min, max)
+      def initialize(session, app_name, probability, min, max, frequency)
         @session = session
         @app_name = app_name
         @app = @session.get_app(app_name)
         @probability = probability
         @min_instances = min
         @max_instances = max
+        @frequency = frequency
       end
       
       def start
         EventMachine.run do
-          EventMachine.add_periodic_timer(10) do
+          EventMachine.add_periodic_timer(@frequency) do
             # Determine if we should unleash the monkey
             if (Random.rand(100) + 1) <= @probability
               @app = @session.get_app(@app_name)

@@ -9,8 +9,9 @@ module CFCM
       method_option :target, :aliases => ["--target", "-t"], :type => :string, :desc => "Cloud Foundry API Target URL"
       method_option :min, :alias => ["--min"], :type => :numeric, :desc => "Minimum number of instances"
       method_option :max, :alias => ["--max"], :type => :numeric, :desc => "Maximum number of instances"
-      method_option :probability, :aliases => ["--probability", "-p"], :type => :numeric, :desc => "[1-100] Probablity for the Chaos Monkey to Add/Remove an instance"
-      def soft(username, password, app, target = "http://api.cloudfoundry.com", min = 1, max = 5, probability = 10)
+      method_option :probability, :aliases => ["--probability", "-p"], :type => :numeric, :desc => "[1-100] Probablity for the Chaos Monkey to add/remove an instance"
+      method_option :frequency, :aliases => ["--frequency", "-f"], :type => :numeric, :desc => "Number of times to attempt to add/remove an instance"
+      def soft(username, password, app, target = "http://api.cloudfoundry.com", min = 1, max = 5, probability = 10, frequency = 10)
         
         if options[:target]
           target = options[:target]
@@ -29,7 +30,10 @@ module CFCM
             probability = options[:probability]
           end
         end
-
+        if options[:frequency]
+          frequency = options[:frequency]
+        end
+        
         require 'cfcm/cf'
         session = CFCM::CF::Session.new(target, username, password)
         if session.is_logged_in 
@@ -42,8 +46,8 @@ module CFCM
           return
         end
         
-        puts "Awakening the monkey on #{app} with a forecast of #{probability}% chance of chaos"
-        monkey = CFCM::Monkey::SoftMonkey.new(session, app, probability, min, max)
+        puts "Awakening the monkey on #{app} with a #{probability}% chance of chaos every #{frequency} second#{frequency > 1? "s" : ""}"
+        monkey = CFCM::Monkey::SoftMonkey.new(session, app, probability, min, max, frequency)
         monkey.start
       end     
     end
