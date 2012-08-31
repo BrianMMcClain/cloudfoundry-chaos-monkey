@@ -5,12 +5,7 @@ module CFCM
     class SoftMonkey      
       def initialize(session, app_name)
         @session = session
-        
-        if @session.app_exists(app_name)
-          @app = @session.get_app(app_name)
-        end
-        
-        puts @app
+        @app = @session.get_app(app_name)
       end
       
       def start
