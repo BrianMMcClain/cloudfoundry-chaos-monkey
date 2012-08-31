@@ -19,11 +19,18 @@ module CFCM
             if (Random.rand(100) + 1) <= @probability
               @app = @session.get_app(@app_name)
               instances = @app[:instances]
-              max_instances = @session.max_instance_growth(@app_name)
-              if max_instances == 0 || @max_instances == instances
+              max_growth = @session.max_instance_growth(@app_name)
+              
+              if instances > @max_instances
+                puts "Shrink due to instance limitations"
+                @app = @session.remove_instance(@app)
+              elsif instances < @min_instances
+                puts "Grow due to instance limitations"
+                @app = @session.add_instance(@app)
+              elsif max_growth == 0 || @max_instances == instances
                 # Shrink
                 puts "Shrink due to instance limitations"
-                @app = @session.add_instance(@app)
+                @app = @session.remove_instance(@app)
               elsif instances == @min_instances
                 # Grow
                 puts "Grow due to instance limitations"
