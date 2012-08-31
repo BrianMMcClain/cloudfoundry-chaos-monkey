@@ -1,4 +1,5 @@
 require "thor"
+require "cfcm/monkey"
 
 module CFCM
   module CLI
@@ -31,6 +32,9 @@ module CFCM
         else
           puts "Could not log in"
         end
+        
+        monkey = CFCM::Monkey::SoftMonkey.new(session, app)
+        monkey.start
       end     
     end
   end
