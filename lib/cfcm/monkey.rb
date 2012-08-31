@@ -21,6 +21,9 @@ module CFCM
               instances = @app[:instances]
               max_growth = @session.max_instance_growth(@app_name)
               
+              puts @max_instances
+              puts instances
+              
               if instances > @max_instances
                 puts "Shrink due to instance limitations"
                 @app = @session.remove_instance(@app)
