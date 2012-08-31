@@ -8,10 +8,14 @@ module CFCM
           @client = VMC::Client.new(target)
           @client.login(username, password)
         rescue
-          puts "Could not login!"
+          #puts "Could not login!"
           #TODO: Handle error
           return
         end
+      end
+      
+      def is_logged_in
+        return @client.auth_token != nil
       end
       
       def get_app(app_name)
@@ -27,9 +31,14 @@ module CFCM
           end
         end
         
-        puts "Application Not Found"
+        #puts "Application Not Found"
         #TODO: Handle error
         return nil
+      end
+      
+      def app_exists(app_name)
+        app = self.get_app(app_name)
+        return app != nil
       end
       
       def remaining_memory
