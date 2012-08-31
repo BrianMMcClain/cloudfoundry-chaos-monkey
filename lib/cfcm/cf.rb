@@ -66,6 +66,19 @@ module CFCM
         max_new_instances = (remaining_memory / app_memory).floor
         return max_new_instances
       end
+      
+      def add_instance(app)
+        app[:instances] += 1
+        @client.update_app(app[:name], app)
+        return app
+      end
+      
+      def remove_instance(app)
+        app[:instances] -= 1
+        @client.update_app(app[:name], app)
+        return app
+      end
+      
     end
   end
 end
