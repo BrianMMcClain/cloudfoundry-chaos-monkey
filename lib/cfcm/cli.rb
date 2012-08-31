@@ -19,7 +19,7 @@ module CFCM
           min = options[:min]
         end
         if options[:max]
-          min = options[:max]
+          max = options[:max]
         end
         if options[:probability]
           if options[:probability] < 1 || options[:probability] > 100
@@ -29,7 +29,7 @@ module CFCM
             probability = options[:probability]
           end
         end
-        
+
         require 'cfcm/cf'
         session = CFCM::CF::Session.new(target, username, password)
         if session.is_logged_in 
