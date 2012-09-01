@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Cloud Foundry Chaos Monkey : Chaos Monkey style service for Cloud Foundry" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Cloud Foundry Chaos Monkey</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/BrianMMcClain/cloudfoundry-chaos-monkey">View on GitHub</a>
+
+          <h1 id="project_title">Cloud Foundry Chaos Monkey</h1>
+          <h2 id="project_tagline">Chaos Monkey style service for Cloud Foundry</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/BrianMMcClain/cloudfoundry-chaos-monkey/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/BrianMMcClain/cloudfoundry-chaos-monkey/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>cloudfoundry-chaos-monkey</h1>
+
+<p>Chaos Monkey style service for Cloud Foundry</p>
+
+<h2>Using Cloud Foundry Chaos Monkey</h2>
+
+<p>First off, grab the Cloud Foundry Chaos Monkey gem</p>
+
+<p><code>gem install cfcm</code></p>
+
+<p>and then unleash the monkey! In this example, we'll use CFCM on an application named <code>myapp</code>, keeping between 2 and 5 instances. We want CFCM to have a 30% chance of adding or removing an instance every 10 seconds. Adding and removeing instances is known as "soft mode", that is, this is equvilant to doing "vmc instane [app] -1". There is a "hard mode" planned that is a bit more chaotic.</p>
+
+<p><code>cfcm soft [email] [password] myapp --min 2 --max 5 -p 30 -f 10</code></p>
+
+<p>It's as easy as that!</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Cloud Foundry Chaos Monkey maintained by <a href="https://github.com/BrianMMcClain">BrianMMcClain</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
