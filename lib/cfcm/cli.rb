@@ -6,11 +6,11 @@ module CFCM
     class Command < Thor
       
       desc "soft USERNAME PASSWORD APP", "Removes/Adds instances via VMC APIs"
-      method_option :target, :aliases => ["--target", "-t"], :type => :string, :desc => "Cloud Foundry API Target URL"
-      method_option :min, :alias => ["--min"], :type => :numeric, :desc => "Minimum number of instances"
-      method_option :max, :alias => ["--max"], :type => :numeric, :desc => "Maximum number of instances"
-      method_option :probability, :aliases => ["--probability", "-p"], :type => :numeric, :desc => "[1-100] Probablity for the Chaos Monkey to add/remove an instance"
-      method_option :frequency, :aliases => ["--frequency", "-f"], :type => :numeric, :desc => "Number of times to attempt to add/remove an instance"
+      method_option :target, :aliases => ["--target", "-t"], :type => :string, :desc => "Cloud Foundry API Target URL (Default: http://api.cloudfoundry.com)"
+      method_option :min, :alias => ["--min"], :type => :numeric, :desc => "Minimum number of instances (Default: 1)"
+      method_option :max, :alias => ["--max"], :type => :numeric, :desc => "Maximum number of instances (Default: 5)"
+      method_option :probability, :aliases => ["--probability", "-p"], :type => :numeric, :desc => "[1-100] Probablity for the Chaos Monkey to add/remove an instance (Default: 10)"
+      method_option :frequency, :aliases => ["--frequency", "-f"], :type => :numeric, :desc => "Number of seconds between attempts to add/remove an instance (Default: 10)"
       def soft(username, password, app, target = "http://api.cloudfoundry.com", min = 1, max = 5, probability = 10, frequency = 10)
         
         if options[:target]
