@@ -9,6 +9,7 @@ pkg
 rdoc
 spec/reports
 test/tmp
+test/input
 test/version_tmp
 tmp
 
