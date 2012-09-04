@@ -50,6 +50,17 @@ module CFCM
         monkey = CFCM::Monkey::SoftMonkey.new(session, app, probability, min, max, frequency)
         monkey.start
       end     
+      
+      
+      desc "hard", "Removes/Adds DEAs through IaaS commands"
+      method_option :iaas, :alias => ["--iaas"], :type => :string, :desc => "IaaS to communicate with [VSPHERE]"
+      method_option :input, :aliases => ["--input", "-i"], :type => :string, :desc => "Path to file listing valid DEAs (See Documentation)"
+      method_option :config, :aliases => ["--config", "-c"], :type => :string, :desc => "Path to IaaS config YML file (See Documentation)"
+      def hard()
+        if (!options[:iaas] || !options[:input] || !options[:config])
+          CFCM::Monkey::HardMonkey.new.show_help
+        end
+      end
     end
   end
 end

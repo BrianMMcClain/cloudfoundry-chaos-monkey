@@ -50,5 +50,12 @@ module CFCM
         end
       end
     end
+    
+    
+    class HardMonkey
+      def show_help
+        puts "oo AH AH AH!"
+      end
+    end
   end
 end
