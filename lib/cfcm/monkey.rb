@@ -54,7 +54,11 @@ module CFCM
     
     class HardMonkey
       def show_help
-        puts "oo AH AH AH!"
+        puts "Description coming soon"
+      end
+      
+      def initalize(iaas, config, input)
+        
       end
     end
   end

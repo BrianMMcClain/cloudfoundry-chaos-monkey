@@ -59,6 +59,8 @@ module CFCM
       def hard()
         if (!options[:iaas] || !options[:input] || !options[:config])
           CFCM::Monkey::HardMonkey.new.show_help
+        else
+          
         end
       end
     end
