@@ -4,7 +4,7 @@ module CFCM
   module IAAS
     class Vsphere
         
-      def initalize(host, user, password, config)
+      def initialize(host, user, password, config)
         @host = host
         @user = user
         @password = password
@@ -13,8 +13,8 @@ module CFCM
       
       def power_off_vm(vm_name)
         opts = {:host=>@host, :user=>@user, :password=>@password, :insecure=>true}
-        vim = VIM.connect opts
-        dc = vim.serviceInstance.content.rootFolder.traverse(config[:datacenter], VIM::Datacenter) or abort "datacenter not found"
+        vim = RbVmomi::VIM.connect opts
+        dc = vim.serviceInstance.content.rootFolder.traverse(config["datacenter"], RbVmomi::VIM::Datacenter) or abort "datacenter not found"
         vm = dc.vmFolder.traverse(vm_name, VIM::VirtualMachine) or abort "VM not found"
         vm.PowerOffVM_Task.wait_for_completion
       end

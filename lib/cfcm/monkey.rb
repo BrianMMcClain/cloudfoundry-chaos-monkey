@@ -73,10 +73,10 @@ module CFCM
         @input = input_fd.read.split
         
         # Build the IaaS interface
-        @iaas_interface = nil              
+        @iaas_interface = nil          
         case iaas.downcase
         when "vsphere"
-          @iaas_interface = CFCM::IAAS::Vsphere.new(@config[:host], @config[:user], @config[:password], @config)
+          @iaas_interface = CFCM::IAAS::Vsphere.new(@config["host"], @config["user"], @config["password"], @config)
         else
           puts "Unknown IaaS -- #{iaas}"
         end
@@ -88,7 +88,9 @@ module CFCM
           EventMachine.add_periodic_timer(@frequency) do
             # Determine if we should unleash the monkey
             if (Random.rand(100) + 1) <= @probability
-              puts "Kill an instance!"
+              vm = @input.sample
+              puts "Sending Power Off to #{vm}"
+              @iaas_interface.power_off_vm(vm)
             end
           end
         end
