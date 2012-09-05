@@ -5,6 +5,12 @@ module CFCM
   module CLI
     class Command < Thor
       
+      desc "version", "Get version info"
+      def version
+        require 'cfcm/version'
+        puts CFCM::VERSION
+      end
+      
       desc "soft USERNAME PASSWORD APP", "Removes/Adds instances via VMC APIs"
       method_option :target, :aliases => ["--target", "-t"], :type => :string, :desc => "Cloud Foundry API Target URL (Default: http://api.cloudfoundry.com)"
       method_option :min, :alias => ["--min"], :type => :numeric, :desc => "Minimum number of instances (Default: 1)"
