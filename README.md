@@ -61,7 +61,3 @@ Then to unleash the monkey on your infrastructure, attempting to hit the VMs eve
 - Implement the remaining IaaS layers
 - Provide a proper interface for the community to insert an IaaS layer
 - Add the ability to specify min/max VMs to be powered on for Hard Mode, including if we should power VMs back on (i.e. We shut down a DEA last time, let's power it back on and power off a Router)
-
-## Special Thanks
-
-- Tyler Power - [@Tyler_Power](https://twitter.com/Tyler_Power)
