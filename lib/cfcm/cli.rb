@@ -56,11 +56,26 @@ module CFCM
       method_option :iaas, :alias => ["--iaas"], :type => :string, :desc => "IaaS to communicate with [VSPHERE]"
       method_option :input, :aliases => ["--input", "-i"], :type => :string, :desc => "Path to file listing valid DEAs (See Documentation)"
       method_option :config, :aliases => ["--config", "-c"], :type => :string, :desc => "Path to IaaS config YML file (See Documentation)"
-      def hard()
+      method_option :probability, :aliases => ["--probability", "-p"], :type => :numeric, :desc => "[1-100] Probablity for the Chaos Monkey to add/remove an instance (Default: 10)"
+      method_option :frequency, :aliases => ["--frequency", "-f"], :type => :numeric, :desc => "Number of seconds between attempts to add/remove an instance (Default: 10)"
+      def hard(probability = 10, frequency = 10)
         if (!options[:iaas] || !options[:input] || !options[:config])
           CFCM::Monkey::HardMonkey.new.show_help
         else
-          monkey = CFCM::Monkey::HardMonkey.new(options[:iaas], options[:config], options[:input])
+          if options[:probability]
+            if options[:probability] < 1 || options[:probability] > 100
+              puts "Probability must be between 1 and 100"
+              return
+            else
+              probability = options[:probability]
+            end
+          end
+          if options[:frequency]
+            frequency = options[:frequency]
+          end
+          
+          monkey = CFCM::Monkey::HardMonkey.new(options[:iaas], options[:config], options[:input], probability, frequency)
+          monkey.start
         end
       end
     end

@@ -60,29 +60,38 @@ module CFCM
         puts "Description coming soon"
       end
       
-      def initialize(iaas, config_file, input_file)
+      def initialize(iaas, config_file, input_file, probability, frequency)
+        
+        @probability = probability
+        @frequency = frequency
         
         # Parse the config file
-        config = YAML.load_file(config_file)
+        @config = YAML.load_file(config_file)
         
         # Parse the input file
         input_fd = File.open(input_file, "rb")
-        input = input_fd.read.split
+        @input = input_fd.read.split
         
         # Build the IaaS interface
-        iaas_interface = nil              
+        @iaas_interface = nil              
         case iaas.downcase
         when "vsphere"
-          iaas_interface = CFCM::IAAS::Vsphere.new(config[:host], config[:user], config[:password])
+          @iaas_interface = CFCM::IAAS::Vsphere.new(@config[:host], @config[:user], @config[:password])
         else
           puts "Unknown IaaS -- #{iaas}"
         end
-
-        # Read in the input VM list
-        
+      end
+      
+      def start
         # Start the Eventmachine loop, similar to above and shut down VMs at random
-        
-        
+        EventMachine.run do
+          EventMachine.add_periodic_timer(@frequency) do
+            # Determine if we should unleash the monkey
+            if (Random.rand(100) + 1) <= @probability
+              puts "Kill an instance!"
+            end
+          end
+        end
       end
     end
   end
