@@ -76,7 +76,7 @@ module CFCM
         @iaas_interface = nil              
         case iaas.downcase
         when "vsphere"
-          @iaas_interface = CFCM::IAAS::Vsphere.new(@config[:host], @config[:user], @config[:password])
+          @iaas_interface = CFCM::IAAS::Vsphere.new(@config[:host], @config[:user], @config[:password], @config)
         else
           puts "Unknown IaaS -- #{iaas}"
         end

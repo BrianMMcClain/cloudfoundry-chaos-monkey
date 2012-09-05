@@ -4,13 +4,14 @@ module CFCM
   module IAAS
     class IaaS
         
-      def initalize(host, user, password)
+      def initalize(host, user, password, config)
         @host = host
         @user = user
         @password = password
+        @config = config
       end
       
-      def power_off_vm(datacenter, vm)
+      def power_off_vm(vm)
         puts "Not Implemented"
       end
         
