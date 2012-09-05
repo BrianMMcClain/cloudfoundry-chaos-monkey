@@ -60,7 +60,7 @@ module CFCM
         if (!options[:iaas] || !options[:input] || !options[:config])
           CFCM::Monkey::HardMonkey.new.show_help
         else
-          
+          monkey = CFCM::Monkey::HardMonkey.new(options[:iaas], options[:config], options[:input])
         end
       end
     end

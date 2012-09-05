@@ -1,4 +1,7 @@
-require "eventmachine"
+require 'eventmachine'
+require 'yaml'
+require 'cfcm/iaas/iaas'
+require 'cfcm/iaas/vsphere'
 
 module CFCM
   module Monkey
@@ -57,7 +60,22 @@ module CFCM
         puts "Description coming soon"
       end
       
-      def initalize(iaas, config, input)
+      def initialize(iaas, config_file, input)
+        
+        config = YAML.load_file(config_file)
+        iaas_interface = nil
+                
+        case iaas.downcase
+        when "vsphere"
+          iaas_interface = CFCM::IAAS::Vsphere.new(config[:host], config[:user], config[:password])
+        else
+          puts "Unknown IaaS -- #{iaas}"
+        end
+
+        # Read in the input VM list
+        
+        # Start the Eventmachine loop, similar to above and shut down VMs at random
+        
         
       end
     end
