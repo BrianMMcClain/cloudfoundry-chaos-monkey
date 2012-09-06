@@ -64,6 +64,7 @@ module CFCM
       method_option :config, :aliases => ["--config", "-c"], :type => :string, :desc => "Path to IaaS config YML file (See Documentation)"
       method_option :probability, :aliases => ["--probability", "-p"], :type => :numeric, :desc => "[1-100] Probablity for the Chaos Monkey to add/remove an instance (Default: 10)"
       method_option :frequency, :aliases => ["--frequency", "-f"], :type => :numeric, :desc => "Number of seconds between attempts to add/remove an instance (Default: 10)"
+      method_option :dry_run, :aliases => ["--dry-run", "-d"], :type => :boolean, :desc => "Simply output the actions that would be taken, do not perform them"
       def hard(probability = 10, frequency = 10)
         if (!options[:iaas] || !options[:input] || !options[:config])
           CFCM::Monkey::HardMonkey.new.show_help
@@ -79,9 +80,13 @@ module CFCM
           if options[:frequency]
             frequency = options[:frequency]
           end
-          
+          dry_run = false
+          if (options[:dry_run])
+            dry_run = true
+          end
+                    
           puts "Awakening the monkey on your #{options[:iaas]} infrastructure with a #{probability}% chance of chaos every #{frequency} second#{frequency > 1? "s" : ""}"
-          monkey = CFCM::Monkey::HardMonkey.new(options[:iaas], options[:config], options[:input], probability, frequency)
+          monkey = CFCM::Monkey::HardMonkey.new(options[:iaas], options[:config], options[:input], probability, frequency, dry_run)
           monkey.start
         end
       end

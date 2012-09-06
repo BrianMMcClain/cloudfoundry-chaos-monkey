@@ -60,10 +60,11 @@ module CFCM
         puts "Description coming soon"
       end
       
-      def initialize(iaas, config_file, input_file, probability, frequency)
+      def initialize(iaas, config_file, input_file, probability, frequency, dry_run = false)
         
         @probability = probability
         @frequency = frequency
+        @dry_run = dry_run
         
         # Parse the config file
         @config = YAML.load_file(config_file)
@@ -90,7 +91,11 @@ module CFCM
             if (Random.rand(100) + 1) <= @probability
               vm = @input.sample
               puts "Sending Power Off to #{vm}"
-              @iaas_interface.power_off_vm(vm)
+              if @dry_run
+                puts "Power Off not sent -- runing in dry run mode"
+              else
+                @iaas_interface.power_off_vm(vm)
+              end
             end
           end
         end
