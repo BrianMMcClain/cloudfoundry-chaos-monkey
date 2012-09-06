@@ -58,6 +58,7 @@ Then to unleash the monkey on your infrastructure, attempting to hit the VMs eve
 
 ## To-Do
 
+- Add option to add/remove more than one instance/VM at a time
 - Implement the remaining IaaS layers
 - Provide a proper interface for the community to insert an IaaS layer
 - Add the ability to specify min/max VMs to be powered on for Hard Mode, including if we should power VMs back on (i.e. We shut down a DEA last time, let's power it back on and power off a Router)
