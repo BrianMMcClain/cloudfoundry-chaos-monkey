@@ -80,6 +80,7 @@ module CFCM
             frequency = options[:frequency]
           end
           
+          puts "Awakening the monkey on your #{options[:iaas]} infrastructure with a #{probability}% chance of chaos every #{frequency} second#{frequency > 1? "s" : ""}"
           monkey = CFCM::Monkey::HardMonkey.new(options[:iaas], options[:config], options[:input], probability, frequency)
           monkey.start
         end
