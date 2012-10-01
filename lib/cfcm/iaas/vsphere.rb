@@ -14,9 +14,9 @@ module CFCM
       def power_off_vm(vm_name)
         opts = {:host=>@host, :user=>@user, :password=>@password, :insecure=>true}
         vim = RbVmomi::VIM.connect opts
-        dc = vim.serviceInstance.content.rootFolder.traverse(config["datacenter"], RbVmomi::VIM::Datacenter) or abort "datacenter not found"
-        vm = dc.vmFolder.traverse(vm_name, VIM::VirtualMachine) or abort "VM not found"
-        vm.PowerOffVM_Task.wait_for_completion
+        dc = vim.serviceInstance.content.rootFolder.traverse(@config["datacenter"], RbVmomi::VIM::Datacenter) or abort "datacenter not found"
+        vm = dc.vmFolder.traverse(vm_name, RbVmomi::VIM::VirtualMachine) or abort "VM not found"
+        vm.PowerOffVM_Task.wait_for_completion        
       end
         
     end
