@@ -1,12 +1,12 @@
-require 'vmc'
+require 'cfoundry'
 
 module CFCM
   module CF
     class Session    
       def initialize(target, username, password)
         begin
-          @client = VMC::Client.new(target)
-          @client.login(username, password)
+          @client = CFoundry::V1::Client.new(target)
+          @client.login({:username => username, :password => password})
         rescue
           #puts "Could not login!"
           #TODO: Handle error
@@ -15,7 +15,7 @@ module CFCM
       end
       
       def is_logged_in
-        return @client.auth_token != nil
+        return @client.logged_in?
       end
       
       def get_app(app_name)
@@ -25,14 +25,7 @@ module CFCM
           return
         end
         
-        @client.apps.each do |app|
-          if app[:name] == app_name
-            return app
-          end
-        end
-        
-        #puts "Application Not Found"
-        #TODO: Handle error
+        return @client.app_by_name(app_name)
         return nil
       end
       
@@ -61,22 +54,22 @@ module CFCM
         
         remaining_memory = self.remaining_memory
         app = self.get_app(app_name)
-        app_memory = app[:resources][:memory]
+        app_memory = app.memory
         
         max_new_instances = (remaining_memory / app_memory).floor
         return max_new_instances
       end
       
       def add_instance(app)
-        app[:instances] += 1
-        @client.update_app(app[:name], app)
-        return app
+        app.total_instances += 1
+        app.update!
+        return self.get_app(app.name)
       end
       
       def remove_instance(app)
-        app[:instances] -= 1
-        @client.update_app(app[:name], app)
-        return app
+        app.total_instances -= 1
+        app.update!
+        return self.get_app(app.name)
       end
       
     end

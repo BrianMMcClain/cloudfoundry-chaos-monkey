@@ -16,5 +16,5 @@ Gem::Specification.new do |gem|
   gem.version       = CFCM::VERSION
   
   gem.add_dependency "thor"
-  gem.add_dependency "vmc"
+  gem.add_dependency "cfoundry"
 end

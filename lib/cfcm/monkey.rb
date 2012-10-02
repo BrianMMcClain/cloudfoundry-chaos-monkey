@@ -22,7 +22,7 @@ module CFCM
             # Determine if we should unleash the monkey
             if (Random.rand(100) + 1) <= @probability
               @app = @session.get_app(@app_name)
-              instances = @app[:instances]
+              instances = @app.total_instances
               max_growth = @session.max_instance_growth(@app_name)
               
               if instances > @max_instances
