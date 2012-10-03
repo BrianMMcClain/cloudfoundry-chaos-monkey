@@ -7,7 +7,8 @@ module CFCM
         begin
           @client = CFoundry::V1::Client.new(target)
           @client.login({:username => username, :password => password})
-        rescue
+        rescue => e
+          raise e
           #puts "Could not login!"
           #TODO: Handle error
           return
