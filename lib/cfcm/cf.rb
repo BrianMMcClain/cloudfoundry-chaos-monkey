@@ -2,7 +2,10 @@ require 'cfoundry'
 
 module CFCM
   module CF
-    class Session    
+    class Session
+
+      attr_reader :client
+
       def initialize(target, username, password)
         begin
           @client = CFoundry::V1::Client.new(target)
@@ -15,7 +18,7 @@ module CFCM
         end
       end
       
-      def is_logged_in
+      def is_logged_in?
         return @client.logged_in?
       end
       
