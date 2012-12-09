@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.cloudfoundry.com/info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Length:
+      - 0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 09 Dec 2012 22:31:03 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"0be08c705ce4189aa60343d90a1ce44c"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+    body:
+      encoding: US-ASCII
+      string: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
+        Cloud Application Platform","allow_debug":false,"frameworks":{"sinatra":{"name":"sinatra","runtimes":[{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"}],"detection":[{"*.rb":"\\s*require[\\s\\(]*[''\"]sinatra(/base)?[''\"]"},{"config/environment.rb":false}]},"play":{"name":"play","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"lib/play.*.jar":true}]},"node":{"name":"node","runtimes":[{"name":"node","version":"0.4.12","description":"Node.js"},{"name":"node06","version":"0.6.8","description":"Node.js"},{"name":"node08","version":"0.8.2","description":"Node.js"}],"detection":[{"*.js":"."}]},"rack":{"name":"rack","runtimes":[{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"}],"detection":[{"config.ru":true},{"config/environment.rb":false}]},"grails":{"name":"grails","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"spring":{"name":"spring","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"java_web":{"name":"java_web","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"lift":{"name":"lift","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"standalone":{"name":"standalone","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"},{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"},{"name":"node","version":"0.4.12","description":"Node.js"},{"name":"node06","version":"0.6.8","description":"Node.js"},{"name":"node08","version":"0.8.2","description":"Node.js"}],"detection":[]},"rails3":{"name":"rails3","runtimes":[{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"}],"detection":[{"config/application.rb":true},{"config/environment.rb":true}]}},"authorization_endpoint":"https://uaa.cloudfoundry.com"}'
+    http_version: 
+  recorded_at: Sun, 09 Dec 2012 22:31:03 GMT
+- request:
+    method: post
+    uri: https://uaa.cloudfoundry.com/oauth/authorize?client_id=vmc&redirect_uri=https://uaa.cloudfoundry.com/redirect/vmc&response_type=token
+    body:
+      encoding: US-ASCII
+      string: credentials=%7B%22username%22%3A%22someuser%22%2C%22password%22%3A%22somepassword%22%7D
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Content-Length:
+      - 111
+  response:
+    status:
+      code: 302
+      message: Found
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 09 Dec 2012 22:31:04 GMT
+      Content-Length:
+      - '0'
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Pragma:
+      - no-cache
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      Cache-Control:
+      - no-cache
+      - no-store
+      Location:
+      - https://uaa.cloudfoundry.com/redirect/vmc#access_token=f@k3t0k3n&token_type=fake&expires_in=513238&jti=2cae5b82-e7ba-4565-806a-e29a48807c22
+      Content-Language:
+      - en-US
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Sun, 09 Dec 2012 22:31:04 GMT
+- request:
+    method: get
+    uri: http://api.cloudfoundry.com/info
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - Ruby
+      Authorization:
+      - fake f@k3t0k3n
+      Content-Length:
+      - 0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sun, 09 Dec 2012 22:31:04 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Keep-Alive:
+      - timeout=20
+      Etag:
+      - ! '"1f6ef7548e9dca61b5fc4ff1aefbc47c"'
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+    body:
+      encoding: US-ASCII
+      string: ! '{"name":"vcap","build":2222,"support":"http://support.cloudfoundry.com","version":"0.999","description":"VMware''s
+        Cloud Application Platform","allow_debug":false,"frameworks":{"spring":{"name":"spring","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"node":{"name":"node","runtimes":[{"name":"node","version":"0.4.12","description":"Node.js"},{"name":"node06","version":"0.6.8","description":"Node.js"},{"name":"node08","version":"0.8.2","description":"Node.js"}],"detection":[{"*.js":"."}]},"sinatra":{"name":"sinatra","runtimes":[{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"}],"detection":[{"*.rb":"\\s*require[\\s\\(]*[''\"]sinatra(/base)?[''\"]"},{"config/environment.rb":false}]},"rack":{"name":"rack","runtimes":[{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"}],"detection":[{"config.ru":true},{"config/environment.rb":false}]},"grails":{"name":"grails","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"rails3":{"name":"rails3","runtimes":[{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"}],"detection":[{"config/application.rb":true},{"config/environment.rb":true}]},"java_web":{"name":"java_web","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]},"standalone":{"name":"standalone","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"},{"name":"ruby18","version":"1.8.7p357","description":"Ruby
+        1.8"},{"name":"ruby19","version":"1.9.2p180","description":"Ruby 1.9"},{"name":"node","version":"0.4.12","description":"Node.js"},{"name":"node06","version":"0.6.8","description":"Node.js"},{"name":"node08","version":"0.8.2","description":"Node.js"}],"detection":[]},"play":{"name":"play","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"lib/play.*.jar":true}]},"lift":{"name":"lift","runtimes":[{"name":"java","version":"1.6.0_24","description":"Java
+        6"},{"name":"java7","version":"1.7.0_04","description":"Java 7"}],"detection":[{"*.war":true}]}},"authorization_endpoint":"https://uaa.cloudfoundry.com","user":"someuser","limits":{"memory":2048,"app_uris":4,"services":16,"apps":20},"usage":{"memory":1728,"apps":8,"services":9}}'
+    http_version: 
+  recorded_at: Sun, 09 Dec 2012 22:31:04 GMT
+recorded_with: VCR 2.3.0
