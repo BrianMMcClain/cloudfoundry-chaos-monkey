@@ -4,7 +4,7 @@
 
 Chaos Monkey style service for Cloud Foundry
 
-##Using Cloud Foundry Chaos Monkey
+## Using Cloud Foundry Chaos Monkey
 
 First off, grab the Cloud Foundry Chaos Monkey gem
 
