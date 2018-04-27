@@ -1,4 +1,4 @@
-#cloudfoundry-chaos-monkey
+# cloudfoundry-chaos-monkey
 
 [![Build Status](https://secure.travis-ci.org/BrianMMcClain/cloudfoundry-chaos-monkey.png)](http://travis-ci.org/BrianMMcClain/cloudfoundry-chaos-monkey)
 
