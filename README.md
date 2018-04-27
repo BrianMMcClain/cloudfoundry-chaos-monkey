@@ -1,10 +1,10 @@
-#cloudfoundry-chaos-monkey
+# cloudfoundry-chaos-monkey
 
 [![Build Status](https://secure.travis-ci.org/BrianMMcClain/cloudfoundry-chaos-monkey.png)](http://travis-ci.org/BrianMMcClain/cloudfoundry-chaos-monkey)
 
 Chaos Monkey style service for Cloud Foundry
 
-##Using Cloud Foundry Chaos Monkey
+## Using Cloud Foundry Chaos Monkey
 
 First off, grab the Cloud Foundry Chaos Monkey gem
 
